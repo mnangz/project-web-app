@@ -1,0 +1,48 @@
+<mat-toolbar color="primary">
+  <span>{{service.form.controls['_id'].value?"Edit Employee":"New Employee"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+  <div class="controles-container">
+    <input type="hidden" formControlName="_id">
+    <input type="hidden" formControlName="__v">
+
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label for="username" >Username</mat-label>
+          <input matInput type="text" formControlName="username" id="username" placeholder="Username">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill" style="width: 100%; padding-bottom: 10px;">
+          <mat-label for="password">Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'"  type="{{service.form.controls['_id'].value}} ?'hidden':'password'" formControlName="password" id="password" placeholder="Password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-checkbox matInput type="checkbox" formControlName="isAdmin">Administration</mat-checkbox>
+          </div>
+          <div class="col-md-4">
+            <mat-checkbox matInput type="checkbox" formControlName="isNurse">Health Professional</mat-checkbox>
+          </div>
+          <div class="col-md-4">
+            <mat-checkbox matInput type="checkbox" formControlName="isEntrance">Security Officer</mat-checkbox>
+          </div>
+          <div class="col-md-4">
+            <mat-checkbox matInput type="checkbox" formControlName="isEmployee">Employee</mat-checkbox>
+          </div>
+        </div>
+
+
+      <div class="button-row" style="padding-top: 10px;">
+        <button mat-stroked-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+        <button mat-stroked-button color="warn" (click)="onClear()">Clear</button>
+      </div>
+
+  </div>
+
+</form>

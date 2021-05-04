@@ -1,0 +1,189 @@
+<div class="mat-elevation-z8 example-container" style="background-color: #2f32a0;">
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <button mat-raised-button [matMenuTriggerFor]="menu" style="width:100%">
+        <mat-icon>file_download</mat-icon>Export As
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="exportDirective.exportTable('csv', {fileName: 'Visitors-Log'})">
+          <span>CSV</span>
+        </button>
+        <button mat-menu-item (click)="exportDirective.exportTable('xls', {fileName: 'Visitors-Log'})">
+          <span>Excel</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <table mat-table class="full-width-table" matSort matTableFilter matTableExporter [dataSource]="dataSource" [exampleEntity]="filterEntity"
+  [filterType]="filterType" [exporter]= "customExporter" #exportDirective="matTableExporter" aria-label="Elements" style="margin-top: 30px;">
+    <!-- Id Column -->
+    <ng-container matColumnDef="approved" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Approved</th>
+      <td mat-cell *matCellDef="let row">{{row.approved? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="employee_id" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sticky>
+        <mat-form-field appearance="legacy">
+          <mat-label>Company ID</mat-label>
+          <input matInput [(ngModel)]="filterEntity.employee_id">
+        </mat-form-field>
+      </th>
+      <td mat-cell *matCellDef="let row">{{row.employee_id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="location" sticky>
+      <th mat-header-cell *matHeaderCellDef sticky>
+        <mat-form-field appearance="legacy">
+          <mat-label>Screening Point</mat-label>
+          <input matInput [(ngModel)]="filterEntity.location">
+        </mat-form-field>
+      </th>
+      <td mat-cell *matCellDef="let row">{{row.location}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fourteen_days">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>14 days self quarantine</th>
+      <td mat-cell *matCellDef="let row">{{row.fourteen_days? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="leave">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Leave or Off shift</th>
+      <td mat-cell *matCellDef="let row">{{row.leave? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="travel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Foreign Travel</th>
+      <td mat-cell *matCellDef="let row">{{row.travel? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="business">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Business Trip</th>
+      <td mat-cell *matCellDef="let row">{{row.business? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Suspected Covid 19 Case</th>
+      <td mat-cell *matCellDef="let row">{{row.contact? 'Yes':'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tested">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Test</th>
+      <td mat-cell *matCellDef="let row">{{row.tested}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="testType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let row">{{row.testType}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Result</th>
+      <td mat-cell *matCellDef="let row">{{row.result}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="verifiedby">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Verified By</th>
+      <td mat-cell *matCellDef="let row">{{row.verifiedby}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="verificationDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ver. Date</th>
+      <td mat-cell *matCellDef="let row">{{row.verificationDate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hotBody">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hot Body</th>
+      <td mat-cell *matCellDef="let row">{{row.hotBody}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="headache">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Headache</th>
+      <td mat-cell *matCellDef="let row">{{row.headache}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="weak">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Weak</th>
+      <td mat-cell *matCellDef="let row">{{row.weak}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="bodyPains">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Body Pains</th>
+      <td mat-cell *matCellDef="let row">{{row.bodyPains}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nausea">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nausea</th>
+      <td mat-cell *matCellDef="let row">{{row.nausea}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="vomiting">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vomiting</th>
+      <td mat-cell *matCellDef="let row">{{row.vomiting}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="soreThroat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sore Throat</th>
+      <td mat-cell *matCellDef="let row">{{row.soreThroat}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cough">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cough</th>
+      <td mat-cell *matCellDef="let row">{{row.cough}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nose">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Running Nose</th>
+      <td mat-cell *matCellDef="let row">{{row.nose}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="chestPains">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Chest Pains</th>
+      <td mat-cell *matCellDef="let row">{{row.chestPains}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="breathing">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Trouble Breathing</th>
+      <td mat-cell *matCellDef="let row">{{row.breathing}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
+      <td mat-cell *matCellDef="let row">{{row.duration}}</td>
+    </ng-container>
+
+
+    <!-- <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+             [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-diagram">
+            <div class="example-element-position"> one </div>
+            <div class="example-element-symbol"> two </div>
+            <div class="example-element-name"> testing </div>
+            <div class="example-element-weight"> nice </div>
+          </div>
+          <div class="example-element-description">
+            nice
+            <span class="example-element-description-attribution"> -- Wikipedia </span>
+          </div>
+        </div>
+      </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

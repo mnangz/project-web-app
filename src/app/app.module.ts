@@ -82,7 +82,7 @@ import { CompanyInfoComponent } from './pages/company/company-info/company-info.
             key: 'token',
           },
 
-          baseEndpoint: 'http://188.166.145.179:5100',
+          baseEndpoint: 'http://localhost:5100',
           login: {
             endpoint: '/api/user/login',
             method: 'post',
